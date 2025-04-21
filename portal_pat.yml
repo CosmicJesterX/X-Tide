@@ -1,1 +1,21 @@
+name: Portal Pat Issue Whisperer
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  whisper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Portal Pat opens the portal...
+        run: |
+          RESPONSES=(
+            "🌀 Welcome, traveler! You have opened portal #$RANDOM."
+            "🌈 This issue smells like interdimensional cheese."
+            "🧙‍♂️ The council of elders has been notified."
+            "🚪 Portal Pat says: 'Yes, but what if it's also a banana?'"
+            "🎩 Please insert one hat to continue."
+          )
+          echo "${RESPONSES[$((RANDOM % ${#RESPONSES[@]}))]}"
 
