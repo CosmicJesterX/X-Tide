@@ -7,6 +7,7 @@ on:
 jobs:
   whisper:
     runs-on: ubuntu-latest
+
     steps:
       - name: Portal Pat opens the portal...
         run: |
@@ -16,6 +17,37 @@ jobs:
             "🧙‍♂️ The council of elders has been notified."
             "🚪 Portal Pat says: 'Yes, but what if it's also a banana?'"
             "🎩 Please insert one hat to continue."
+            "🍪 Madame Cookie senses a disturbance in the dough."
+            "📦 This issue has been boxed, labeled, and shipped to another dimension."
+            "🎭 Identity confirmed: You are now Gligma Fork #$RANDOM"
+            "🐇 Hop down the stacktrace, Alice."
+            "🔮 Starla Moonshadow predicted this bug in her sleep."
+            "🖥️ Chuck Norris doesn’t debug. The code fixes itself out of fear."
+            "🥋 Steven Seagal once stared at a bluescreen until it turned green."
+            "💾 Chuck Norris wrote Windows 95... in 1993... using only Notepad."
+            "🕶️ Steven Seagal doesn’t run antivirus. Viruses uninstall *themselves*."
+            "💣 Chuck Norris can divide by zero. On purpose. With a keyboard slam."
+            "⚡ Steven Seagal roundhouse-kicked the floppy disk into extinction."
+            "🚫 Chuck Norris didn’t accept the EULA. Microsoft did."
+            "🔥 Steven Seagal once defragged a hard drive using Tai Chi."
+            "👊 Chuck Norris can write an infinite loop... and break it with a wink."
+            "🎤 Steven Seagal connected a printer using interpretive dance."
           )
-          echo "${RESPONSES[$((RANDOM % ${#RESPONSES[@]}))]}"
+PICK="${RESPONSES[$((RANDOM % ${#RESPONSES[@]}))]}"
+          echo "$PICK"
 
+          echo "## 🌀 Portal #${{ github.event.issue.number }} — $(date)" >> PORTAL_LOG.md
+          echo "**Opened by:** @${{ github.event.issue.user.login }}" >> PORTAL_LOG.md
+          echo "**Whispered wisdom:** \"$PICK\"" >> PORTAL_LOG.md
+          echo "---" >> PORTAL_LOG.md
+
+      - name: Commit portal log
+        run: |
+          git config --global user.name "Portal Pat Bot"
+          git config --global user.email "portal@pat.bot"
+          git add PORTAL_LOG.md
+          git commit -m "Log Portal #${{ github.event.issue.number }}"
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ 
