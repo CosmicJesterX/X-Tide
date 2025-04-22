@@ -36,18 +36,4 @@ jobs:
 PICK="${RESPONSES[$((RANDOM % ${#RESPONSES[@]}))]}"
           echo "$PICK"
 
-          echo "## 🌀 Portal #${{ github.event.issue.number }} — $(date)" >> PORTAL_LOG.md
-          echo "**Opened by:** @${{ github.event.issue.user.login }}" >> PORTAL_LOG.md
-          echo "**Whispered wisdom:** \"$PICK\"" >> PORTAL_LOG.md
-          echo "---" >> PORTAL_LOG.md
-
-      - name: Commit portal log
-        run: |
-          git config --global user.name "Portal Pat Bot"
-          git config --global user.email "portal@pat.bot"
-          git add PORTAL_LOG.md
-          git commit -m "Log Portal #${{ github.event.issue.number }}"
-          git push
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
- 
+          
